@@ -240,17 +240,30 @@ class DigitalOcean
     response = make_api_request(api_request_url, :DELETE)
   end
 
+  # Image Actions
+  # https://developers.digitalocean.com/#image-actions
+  #
+  # Not tested
+  def transfer_image(image_id, destination_region)
+    api_request_url = @api_base + "images/" + image_id.to_s + "/actions"
+    api_request_payload = { :type => "transfer", :region => destination_region }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  # Not tested
+  def get_image_action(image_id, action_id)
+    api_request_url = @api_base + "images/" + image_id.to_s + "/actions/" + action_id.to_s
+    make_api_request(api_request_url)
+  end
+
+  # Other
 
   def list_images
     api_request_url = @api_base + "images"
-    api_request_payload = {}
-    api_request_headers = {}
-    api_request_headers[:Authorization] = "Bearer #{self.token}"
-    response = RestClient.get api_url, {:Authorization => "Bearer #{self.token}"}
-  end
-
-  def list_droplets
-    api_request_url = @api_base + "droplets"
+    # api_request_payload = {}
+    # api_request_headers = {}
+    # api_request_headers[:Authorization] = "Bearer #{self.token}"
+    # response = RestClient.get api_requst_url, {:Authorization => "Bearer #{self.token}"}
     response = make_api_request(api_request_url)
   end
 
