@@ -2,10 +2,27 @@ require 'rest-client'
 
 class DigitalOcean
 
-  def initialize(token)
+  def initialize(token, version="v2")
     @token = token
-    @api_base = "https://api.digitalocean.com/v2/"
+    @api_base = "https://api.digitalocean.com/" + version + "/"
   end
+
+  # Actions
+  # https://developers.digitalocean.com/#actions
+  #
+  def list_actions
+    api_request_url = @api_base + "actions"
+    response = make_api_request(api_request_url)
+  end
+
+  def get_action(action_id)
+    api_request_url = @api_base + "actions/" + action_id.to_s
+    response = make_api_request(api_request_url)
+  end
+
+
+
+
 
   def list_images
     # puts "Authorization: Bearer #{self.token}"
