@@ -256,23 +256,36 @@ class DigitalOcean
     make_api_request(api_request_url)
   end
 
-  # Other
-
+  # Images
+  # https://developers.digitalocean.com/#images
+  #
   def list_images
     api_request_url = @api_base + "images"
-    # api_request_payload = {}
-    # api_request_headers = {}
-    # api_request_headers[:Authorization] = "Bearer #{self.token}"
-    # response = RestClient.get api_requst_url, {:Authorization => "Bearer #{self.token}"}
     response = make_api_request(api_request_url)
   end
 
+  # Not tested
+  def get_image(image_id_or_slug)
+    api_request_url = @api_base + "images/" + image_id_or_slug.to_s
+    make_api_request(api_request_url)
+  end
 
+  # Not tested
+  def delete_image(image_id)
+    api_request_url = @api_base + "images/" + image_id_or_slug.to_s
+    response = make_api_request(api_request_url, :DELETE)
+  end
 
+  # Not tested
+  def update_image(image_id, new_name)
+    api_request_url = @api_base + "images/" + image_id_or_slug.to_s
+    api_request_payload = { :name => new_name }
+    puts "Error: update_image not yet implemented"
+    response = make_api_request(api_request_url, :PUT, api_request_payload)
+  end
 
-
-
-
+  # Helper Methods
+  #
   def token=(token)
     @token = token
   end
