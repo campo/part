@@ -284,6 +284,36 @@ class DigitalOcean
     response = make_api_request(api_request_url, :PUT, api_request_payload)
   end
 
+  # Keys
+  # https://developers.digitalocean.com/#keys
+  #
+  def list_keys
+    api_request_url = @api_base + "account/keys"
+    response = make_api_request(api_request_url)
+  end
+
+  def create_key(key_name, public_key)
+    api_request_url = @api_base + "account/keys"
+    api_request_payload = { :name => key_name, :public_key => public_key }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  def get_key(key_id_or_fingerprint)
+    api_request_url = @api_base + "account/keys/" + key_id_or_fingerprint.to_s
+    response = make_api_request(api_request_url)
+  end
+
+  def update_key(key_id_or_fingerprint, new_name)
+    api_request_url = @api_base + "account/keys/" + key_id_or_fingerprint.to_s
+    api_request_payload = { :name => new_name }
+    response = make_api_request(api_request_url, :PUT, api_request_payload)
+  end
+
+  def delete_key(key_id_or_fingerprint)
+    api_request_url = @api_base + "account/keys/" + key_id_or_fingerprint.to_s
+    response = make_api_request(api_request_url, :DELETE)
+  end
+
   # Regions
   # https://developers.digitalocean.com/#regions
   #
@@ -321,7 +351,7 @@ class DigitalOcean
     when :POST
       response = RestClient.post api_url, api_request_payload, api_request_headers
     when :PUT
-      puts "Error: PUT method not yet implemented for API calls."
+      response = RestClient.put api_url, api_request_payload, api_request_headers
     when :DELETE
       response = RestClient.delete api_url, api_request_headers
     else
