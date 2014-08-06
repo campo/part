@@ -1,6 +1,6 @@
 require 'rest-client'
 
-class DigitalOcean
+class Part
 
   def initialize(token, version="v2")
     @token = token
@@ -192,6 +192,7 @@ class DigitalOcean
   def list_droplets
     api_request_url = @api_base + "droplets"
     response = make_api_request(api_request_url)
+    # JSON.parse(response)["droplets"]
   end
 
   def list_kernels(droplet_id)
