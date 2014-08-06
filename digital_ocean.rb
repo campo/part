@@ -186,17 +186,59 @@ class DigitalOcean
     response = make_api_request(api_request_url)
   end
 
+  # Droplets
+  # https://developers.digitalocean.com/#droplets
+  #
+  def list_droplets
+    api_request_url = @api_base + "droplets"
+    response = make_api_request(api_request_url)
+  end
+
+  def list_kernels(droplet_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/kernels"
+    response = make_api_request(api_request_url)
+  end
+
+  def get_snapshots(droplet_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/snapshots"
+    response = make_api_request(api_request_url)
+  end
+
+  def get_backups(droplet_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/backups"
+    response = make_api_request(api_request_url)
+  end
+
   def get_droplet_actions(droplet_id)
     api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
     response = make_api_request(api_request_url)
   end
 
+  def create_droplet(droplet_name, droplet_region, droplet_image, droplet_size="512mb", ssh_keys=nil, backups=nil, ipv6=nil, private_networking=nil)
+    api_request_url = @api_base + "droplets"
+    api_request_payload = {
+      :name => droplet_name,
+      :region => droplet_region,
+      :size => droplet_size,
+      :image => droplet_image
+    }
+    api_request_payload[:ssh_keys] = ssh_keys unless ssh_keys.nil?
+    api_request_payload[:backups] = ssh_keys unless backups.nil?
+    api_request_payload[:ipv6] = ssh_keys unless ipv6.nil?
+    api_request_payload[:private_networking] = ssh_keys unless private_networking.nil?
 
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
 
+  def get_droplet(droplet_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s
+    response = make_api_request(api_request_url)
+  end
 
-
-
-
+  def delete_droplet(droplet_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s
+    response = make_api_request(api_request_url, :DELETE)
+  end
 
 
   def list_images
@@ -212,13 +254,11 @@ class DigitalOcean
     response = make_api_request(api_request_url)
   end
 
-  def create_droplet(options={})
-    api_url = @api_base + "droplets"
-    api_request_payload = {}
-    api_request_headers = {}
-    api_request_headers[:Authorization] = "Bearer #{self.token}"
-    response = RestClient.post api_url, api_request_payload, api_request_headers
-  end
+
+
+
+
+
 
   def token=(token)
     @token = token
@@ -241,7 +281,7 @@ class DigitalOcean
     when :PUT
       puts "Error: PUT method not yet implemented for API calls."
     when :DELETE
-      puts "Error: DELETE method not yet implemented for API calls."
+      response = RestClient.delete api_url, api_request_headers
     else
       puts "Error: Invalid HTTP method used for this request."
     end
