@@ -284,6 +284,14 @@ class DigitalOcean
     response = make_api_request(api_request_url, :PUT, api_request_payload)
   end
 
+  # Regions
+  # https://developers.digitalocean.com/#regions
+  #
+  def list_regions
+    api_request_url = @api_base + "regions"
+    response = make_api_request(api_request_url)
+  end
+
   # Helper Methods
   #
   def token=(token)
