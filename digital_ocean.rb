@@ -292,6 +292,14 @@ class DigitalOcean
     response = make_api_request(api_request_url)
   end
 
+  # Sizes
+  # https://developers.digitalocean.com/#sizes
+  #
+  def list_sizes
+    api_request_url = @api_base + "sizes"
+    response = make_api_request(api_request_url)
+  end
+
   # Helper Methods
   #
   def token=(token)
