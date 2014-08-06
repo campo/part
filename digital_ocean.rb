@@ -20,7 +20,36 @@ class DigitalOcean
     response = make_api_request(api_request_url)
   end
 
+  # Domain Records
+  # https://developers.digitalocean.com/#domain-records
+  #
+  # Example: list_domain_records("google.com")
+  #
+  def list_domain_records(domain_name)
+    api_request_url = @api_base + "domains/" + domain_name + "/records"
+    response = make_api_request(api_request_url)
+  end
 
+  def create_domain_record(domain_name)
+    api_request_url = @api_base + "domains/" + domain_name + "/records"
+    # response = make_api_request(api_request_url, :POST)
+    puts "Error: create_domain_record not yet implemented."
+  end
+
+  def get_domain_record(domain_name, record_id)
+    api_request_url = @api_base + "domains/" + domain_name + "/records/" + record_id.to_s
+    response = make_api_request(api_request_url)
+  end
+
+  def delete_domain_record(domain_name, record_id)
+    api_request_url = @api_base + "domains/" + domain_name + "/records/" + record_id.to_s
+    puts "Error: delete_domain_record not yet implemented."
+  end
+
+  def update_domain_record(domain_name, record_id)
+    api_request_url = @api_base + "domains/" + domain_name + "/records/" + record_id.to_s
+    puts "Error: update_domain_record not yet implemented."
+  end
 
 
 
@@ -36,7 +65,7 @@ class DigitalOcean
   def list_droplets
     api_request_url = @api_base + "droplets"
     response = make_api_request(api_request_url)
-  end  
+  end
 
   def create_droplet(options={})
     api_url = @api_base + "droplets"
