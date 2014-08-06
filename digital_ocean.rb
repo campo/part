@@ -51,10 +51,36 @@ class DigitalOcean
     puts "Error: update_domain_record not yet implemented."
   end
 
+  # Domains
+  # https://developers.digitalocean.com/#domains
+  #
+  def list_domains
+    api_request_url = @api_base + "domains"
+    response = make_api_request(api_request_url)
+  end
+
+  # Not yet tested
+  def create_domain(domain_name, ip_address)
+    api_request_url = @api_base + "domains"
+    api_request_palyload = { :name => domain_name, :ip_address => ip_address }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  # Example: get_domain("google.com")
+  #
+  def get_domain(domain_name)
+    api_request_url = @api_base + "domains/" + domain_name.to_s
+    response = make_api_request(api_request_url)
+  end
+
+  def delete_domain(domain_name)
+    api_request_url = @api_base + "domains/" + domain_name.to_s
+    puts "Error: delete_domain not yet implemented."
+  end
+
 
 
   def list_images
-    # puts "Authorization: Bearer #{self.token}"
     api_request_url = @api_base + "images"
     api_request_payload = {}
     api_request_headers = {}
