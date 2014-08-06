@@ -78,6 +78,125 @@ class DigitalOcean
     puts "Error: delete_domain not yet implemented."
   end
 
+  # Droplet Actions
+  # https://developers.digitalocean.com/#droplet-actions
+  #
+  def reboot_droplet(droplet_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
+    api_request_payload = { :type => "reboot" }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  def power_cycle_droplet(droplet_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
+    api_request_payload = { :type => "power_cycle" }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  def shutdown_droplet(droplet_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
+    api_request_payload = { :type => "shutdown" }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  # Not tested
+  def power_off_droplet(droplet_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
+    api_request_payload = { :type => "power_off" }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  def power_on_droplet(droplet_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
+    api_request_payload = { :type => "power_on" }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  # Not tested
+  def password_reset_droplet(droplet_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
+    api_request_payload = { :type => "password_reset" }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  # Not tested
+  def resize_droplet(droplet_id, new_size)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
+    api_request_payload = { :type => "resize", :size => new_size }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  # Not tested
+  def restore_droplet(droplet_id, image_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
+    api_request_payload = { :type => "restore", :image => image_id }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  # Not tested
+  def rebuild_droplet(droplet_id, image_id_or_slug)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
+    api_request_payload = { :type => "rebuild", :image => image_id_or_slug }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  def rename_droplet(droplet_id, new_name)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
+    api_request_payload = { :type => "rename", :name => new_name }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  # Not tested
+  def change_droplet_kernel(droplet_id, kernel_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
+    api_request_payload = { :type => "change_kernel", :kernel => kernel_id }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  # Not tested
+  def enable_ipv6(droplet_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
+    api_request_payload = { :type => "enable_ipv6" }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  # Not tested
+  def disable_backups(droplet_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
+    api_request_payload = { :type => "disable_backups" }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  # Not tested
+  def enable_private_networking(droplet_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
+    api_request_payload = { :type => "enable_private_networking" }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  # Not tested
+  def snapshot(droplet_id, snapshot_name)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
+    api_request_payload = { :type => "snapshot", :name => snapshot_name }
+    response = make_api_request(api_request_url, :POST, api_request_payload)
+  end
+
+  def get_droplet_action(droplet_id, action_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions/" + action_id.to_s
+    response = make_api_request(api_request_url)
+  end
+
+  def get_droplet_actions(droplet_id)
+    api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/actions"
+    response = make_api_request(api_request_url)
+  end
+
+
+
+
+
+
+
 
 
   def list_images
