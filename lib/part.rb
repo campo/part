@@ -7,6 +7,14 @@ class Part
     @api_base = "https://api.digitalocean.com/" + version + "/"
   end
 
+  def api_base
+    @api_base
+  end
+
+  def api_base=(base_api_url)
+    @api_base = base_api_url
+  end
+
   # Actions
   # https://developers.digitalocean.com/#actions
   #
