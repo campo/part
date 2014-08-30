@@ -1,5 +1,6 @@
-# A sample Gemfile
+# Gemfile for Part
 source "https://rubygems.org"
 
-# gem "rails"
+# Include anything necessary to satisfy
+# the requirements of the gemspec
 gemspec
