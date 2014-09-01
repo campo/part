@@ -10,5 +10,6 @@ Gem::Specification.new do |s|
   s.homepage    =
     'http://rubygems.org/gems/part'
   s.license       = 'MIT'
-  s.add_runtime_dependency('rest-client')
+  s.add_runtime_dependency 'rest-client'
+  s.add_development_dependency 'webmock'
 end
