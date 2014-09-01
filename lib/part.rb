@@ -41,7 +41,7 @@ class Part
   def create_domain_record(domain_name)
     api_request_url = @api_base + "domains/" + domain_name + "/records"
     # response = make_api_request(api_request_url, :POST)
-    puts "Error: create_domain_record not yet implemented."
+    raise NotImplementedError, "create_domain_record not yet implemented."
   end
 
   def get_domain_record(domain_name, record_id)
@@ -51,12 +51,12 @@ class Part
 
   def delete_domain_record(domain_name, record_id)
     api_request_url = @api_base + "domains/" + domain_name + "/records/" + record_id.to_s
-    puts "Error: delete_domain_record not yet implemented."
+    raise NotImplementedError, "delete_domain_record not yet implemented."
   end
 
   def update_domain_record(domain_name, record_id)
     api_request_url = @api_base + "domains/" + domain_name + "/records/" + record_id.to_s
-    puts "Error: update_domain_record not yet implemented."
+    raise NotImplementedError, "update_domain_record not yet implemented."
   end
 
   # Domains
@@ -83,7 +83,7 @@ class Part
 
   def delete_domain(domain_name)
     api_request_url = @api_base + "domains/" + domain_name.to_s
-    puts "Error: delete_domain not yet implemented."
+    raise NotImplementedError, "delete_domain not yet implemented."
   end
 
   # Droplet Actions
@@ -289,8 +289,8 @@ class Part
   def update_image(image_id, new_name)
     api_request_url = @api_base + "images/" + image_id_or_slug.to_s
     api_request_payload = { :name => new_name }
-    puts "Error: update_image not yet implemented"
-    response = make_api_request(api_request_url, :PUT, api_request_payload)
+    # response = make_api_request(api_request_url, :PUT, api_request_payload)
+    raise NotImplementedError, "update_image not yet implemented."
   end
 
   # Keys
@@ -364,7 +364,7 @@ class Part
     when :DELETE
       response = RestClient.delete api_url, api_request_headers
     else
-      puts "Error: Invalid HTTP method used for this request."
+      raise ArgumentError, "Invalid HTTP method used for this request."
     end
   end
 
