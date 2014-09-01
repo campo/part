@@ -1,8 +1,6 @@
-require './digital_ocean'
-require 'yaml'
+require './lib/part'
 
-CONFIG = YAML.load_file("config.yml")
-# puts CONFIG['digital_ocean_token']
+digital_ocean_token = ENV['DIGITAL_OCEAN_TOKEN']
+client = Part.new(digital_ocean_token)
 
-client = DigitalOcean.new(CONFIG['digital_ocean_token'])
 puts client.list_droplets
