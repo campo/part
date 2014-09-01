@@ -1,1 +1,4 @@
-config.yml
+# Do not check in Gemfile.lock when developing
+# a gem. Use the gemspec command in the Gemfile
+# and add dependencies in the gemspec
+Gemfile.lock
