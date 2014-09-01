@@ -2,3 +2,6 @@
 # a gem. Use the gemspec command in the Gemfile
 # and add dependencies in the gemspec
 Gemfile.lock
+
+# Ignore the directory the gem gets built to
+pkg/
