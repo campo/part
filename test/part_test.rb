@@ -2,6 +2,8 @@ require 'minitest/spec'
 require 'minitest/autorun'
 require 'part'
 require 'json'
+# Webmock Gem: https://github.com/bblimke/webmock
+require 'webmock/minitest'
 
 describe Part do
   before do
@@ -25,7 +27,11 @@ describe Part do
 
   describe "list droplets" do
     it "returns the list of droplets" do
+      stub_request(:get, @part.api_base + "droplets").with(:headers => {'Authorization'=>"Bearer #{@digital_ocean_token}" }).to_return(:status => 200, :body => '{ "droplets": {} }', :headers => {})
+
       response = @part.list_droplets
+      response.code.must_equal 200
+
       response = JSON.parse(response)
       response.has_key?("droplets").must_equal true
     end
