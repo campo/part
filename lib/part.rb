@@ -204,6 +204,10 @@ class Part
   end
 
   def list_kernels(droplet_id)
+    self.get_kernels(droplet_id)
+  end
+
+  def get_kernels(droplet_id)
     api_request_url = @api_base + "droplets/" + droplet_id.to_s + "/kernels"
     response = make_api_request(api_request_url)
   end
